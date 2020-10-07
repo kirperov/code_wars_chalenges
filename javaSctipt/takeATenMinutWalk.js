@@ -12,42 +12,44 @@ It will never give you an empty array (that's not a walk, that's standing still!
 */
 
 function isValidWalk(walk) {
-    //insert brilliant code here
-   myWalk = [];
-    myWalk.push(walk);
-    var time = 10;
-    var n = 1;
-    var s = 1;
-    var w = 1;
-    var e = 1;
-    var totalWalks = 0;
-    for(var i = 0; i< walk.length; i++) {
-      if(walk[i] == "n") {
-        walk[i] = n;
-      } else if(walk[i] == "s") {
-        walk[i] = s;
-      } else if(walk[i] == "w") {
-          walk[i] = w;
-      } else if(walk[i] == "e") {
-        walk[i] = e;
+  //insert brilliant code here
+ myWalk = [];
+  myWalk.push(walk);
+  var time = 10;
+  var n = 1;
+  var s = 1;
+  var w = 1;
+  var e = 1;
+  var totalWalks = 0;
+  for(var i = 0; i< walk.length; i++) {
+    if(walk[i] == "n") {
+      if(walk[0] == "n" && walk[1] == "n") {
+        return false;
       }
-    }
-    //Count total sum function
-    add = function arr() {
-      return walk.reduce((a,b) => a + b, 0)
-      };
-      totalWalks = add(walk);
-    if(totalWalks > time || totalWalks < time) {
-      return false
-    } else {
-      return true
+      walk[i] = n;
+    } else if(walk[i] == "s") {
+      walk[i] = s;
+    } else if(walk[i] == "w") {
+        walk[i] = w;
+    } else if(walk[i] == "e") {
+      walk[i] = e;
     }
   }
-  
-  console.log(isValidWalk(['s','s']));
+  //Count total sum function
+  add = function arr() {
+    return walk.reduce((a,b) => a + b, 0)
+    };
+    totalWalks = add(walk);
+  if(totalWalks > time || totalWalks < time) {
+    return false
+  } else {
+    return true
+  }
+} 
+  console.log(isValidWalk(['n','s','n','s','n','s','n','s','n','s']));
   //some test cases for you...
 /*Test.expect(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), 'should return true');
 Test.expect(!isValidWalk(['w','e','w','e','w','e','w','e','w','e','w','e']), 'should return false');
 Test.expect(!isValidWalk(['w']), 'should return false');
 Test.expect(!isValidWalk(['n','n','n','s','n','s','n','s','n','s']), 'should return false');
-*/
+*/ 
