@@ -13,8 +13,6 @@ It will never give you an empty array (that's not a walk, that's standing still!
 
 function isValidWalk(walk) {
   //insert brilliant code here
- myWalk = [];
-  myWalk.push(walk);
   var time = 10;
   var n = 1;
   var s = 1;
@@ -22,10 +20,7 @@ function isValidWalk(walk) {
   var e = 1;
   var totalWalks = 0;
   for(var i = 0; i< walk.length; i++) {
-    if(walk[i] == "n") {
-      if(walk[0] == "n" && walk[1] == "n") {
-        return false;
-      }
+    if(walk[i] == "n") { 
       walk[i] = n;
     } else if(walk[i] == "s") {
       walk[i] = s;
@@ -33,19 +28,42 @@ function isValidWalk(walk) {
         walk[i] = w;
     } else if(walk[i] == "e") {
       walk[i] = e;
+    }  
+}
+ var result;
+    for(let i = 0; i < walk.length;i++) {
+       // nested loop
+       for(let j = 0; j < walk.length;j++) {
+          // do not compare same elements
+          if(i !== j) {
+            // check if elements match
+            if(walk[i] === walk[j]){
+                     // duplicate element found
+               result = true;
+                     // terminate inner loop
+               break;
+            }
+          }
+       }
+       // terminate outer loop
+       if(result){
+          break;
+       }
     }
-  }
+    if(result) {
+       return false;
+    } 
   //Count total sum function
   add = function arr() {
     return walk.reduce((a,b) => a + b, 0)
     };
     totalWalks = add(walk);
   if(totalWalks > time || totalWalks < time) {
-    return false
+    return false;
   } else {
-    return true
+    return true;
   }
-} 
+}  
   console.log(isValidWalk(['n','s','n','s','n','s','n','s','n','s']));
   //some test cases for you...
 /*Test.expect(isValidWalk(['n','s','n','s','n','s','n','s','n','s']), 'should return true');
